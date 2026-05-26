@@ -15,7 +15,7 @@ const JobSchema = new Schema<IJobDocument>({
   salary: { type: String },
   description: { type: String, required: true },
   requirements: [{ type: String }],
-  postedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  postedBy: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
 })
 
