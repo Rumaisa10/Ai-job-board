@@ -1,7 +1,8 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  serverExternalPackages: ['mongoose'],  // ← moved from experimental
+  output: 'standalone'
+}
 
-export default nextConfig;
+export default nextConfig
