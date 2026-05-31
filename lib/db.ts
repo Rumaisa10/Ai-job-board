@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+if (process.env.NEXT_PHASE === 'phase-production-build') {
+  module.exports = { connectDB: async () => {} }
+}
 
 const MONGODB_URI = process.env.MONGODB_URI!
 
