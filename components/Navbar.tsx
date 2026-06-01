@@ -7,12 +7,18 @@ export default function Navbar() {
         <Link href="/" className="text-xl font-bold text-blue-600">
           AI Job Board
         </Link>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Link
             href="/jobs"
             className="text-gray-600 hover:text-blue-600 transition-colors"
           >
             Browse Jobs
+          </Link>
+          <Link
+            href="/saved"
+            className="text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            Saved Jobs
           </Link>
           <Link
             href="/post-job"
