@@ -15,7 +15,7 @@ const JobSchema = new Schema<IJobDocument>({
   salary: { type: String },
   description: { type: String, required: true },
   requirements: [{ type: String }],
-  postedBy: { type: String, required: true },  // ← must be String not ObjectId
+  postedBy: { type: String, required: true },  
   createdAt: { type: Date, default: Date.now }
 })
 

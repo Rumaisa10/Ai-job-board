@@ -32,12 +32,14 @@ export async function POST(request: NextRequest) {
   try {
     await connectDB()
     const body = await request.json()
-    const job = await Job.create(body)
+    console.log('Received body:', body)  
+    const job = await Job.create({...body,postedBy: '507f1f77bcf86cd799439011'})
     return NextResponse.json(job, { status: 201 })
 
   } catch (error) {
+    console.error('POST error:', error)  
     return NextResponse.json(
-      { error: 'Failed to create job' },
+      { error: 'Failed to create job', details: String(error) },
       { status: 500 }
     )
   }

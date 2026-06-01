@@ -19,7 +19,7 @@ if (!global.mongoose) {
 
 export async function connectDB(): Promise<typeof mongoose> {
   if (!MONGODB_URI) {
-    throw new Error('Please define MONGODB_URI in .env.local')  // ← throw here instead
+    throw new Error('Please define MONGODB_URI in .env.local')  
   }
 
   if (cached.conn) return cached.conn

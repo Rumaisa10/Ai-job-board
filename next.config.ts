@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ['mongoose'],  // ← moved from experimental
+  serverExternalPackages: ['mongoose'], 
   output: 'standalone'
 }
 
