@@ -27,7 +27,7 @@ export default async function SavedJobsPage() {
           Saved Jobs
         </h1>
         <p className="text-gray-500 text-center py-12">
-          You haven't saved any jobs yet. Browse jobs and save ones you like!
+          You havent saved any jobs yet. Browse jobs and save ones you like!
         </p>
       </div>
     )
