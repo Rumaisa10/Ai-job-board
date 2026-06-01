@@ -1,10 +1,10 @@
-import mongoose ,{Schema} from "mongoose";
-import { IUser } from "@/types";
+import mongoose, { Document, Schema } from 'mongoose'
+import { IUser } from '@/types'
 
-export interface IUserDocument extends Omit<IUser , '_id'>, Document{}
+export interface IUserDocument extends Omit<IUser, '_id'>, Document {}
 
 const UserSchema = new Schema<IUserDocument>({
-    name: { type: String, required: true },
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   image: { type: String },
   role: {
@@ -12,7 +12,7 @@ const UserSchema = new Schema<IUserDocument>({
     enum: ['employer', 'jobseeker'],
     default: 'jobseeker'
   },
-  savedJobs: [{ type: Schema.Types.ObjectId, ref: 'Job' }],
+  savedJobs: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now }
 })
 

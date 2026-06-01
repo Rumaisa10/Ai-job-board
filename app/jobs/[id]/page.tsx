@@ -1,13 +1,16 @@
 import { connectDB } from '@/lib/db'
 import { Job } from '@/models/Job'
+import { User } from '@/models/User'
 import { IJob } from '@/types'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { auth } from '@/lib/auth'
+import SaveJobButton from '@/components/jobs/SaveJobButton'
 
 export const dynamic = 'force-dynamic'
 
 interface PageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 async function getJob(id: string): Promise<IJob | null> {
@@ -22,9 +25,20 @@ async function getJob(id: string): Promise<IJob | null> {
 }
 
 export default async function JobDetailPage({ params }: PageProps) {
-  const job = await getJob(params.id)
+  const { id } = await params
+  const job = await getJob(id)
 
   if (!job) notFound()
+
+  // check if user has saved this job
+  const session = await auth()
+  let initialSaved = false
+
+  if (session?.user?.email) {
+    await connectDB()
+    const user = await User.findOne({ email: session.user.email })
+    initialSaved = user?.savedJobs?.includes(id) ?? false
+  }
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
@@ -55,15 +69,18 @@ export default async function JobDetailPage({ params }: PageProps) {
         <p className="text-gray-700 mb-6 leading-relaxed">{job.description}</p>
 
         <h2 className="text-xl font-semibold mb-3">Requirements</h2>
-        <ul className="list-disc list-inside space-y-1">
+        <ul className="list-disc list-inside space-y-1 mb-8">
           {job.requirements.map((req, index) => (
             <li key={index} className="text-gray-700">{req}</li>
           ))}
         </ul>
 
-        <button className="mt-8 w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-          Apply Now
-        </button>
+        <div className="flex gap-4">
+          <button className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            Apply Now
+          </button>
+          <SaveJobButton jobId={id} initialSaved={initialSaved} />
+        </div>
       </div>
     </div>
   )
