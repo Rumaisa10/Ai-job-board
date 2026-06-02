@@ -3,16 +3,28 @@ import Link from 'next/link'
 export default function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-200 px-4 py-3">
-      <div className="max-w-4xl mx-auto flex justify-between items-center">
+      <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Link href="/" className="text-xl font-bold text-blue-600">
           AI Job Board
         </Link>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Link
             href="/jobs"
             className="text-gray-600 hover:text-blue-600 transition-colors"
           >
             Browse Jobs
+          </Link>
+          <Link
+            href="/saved"
+            className="text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            Saved Jobs
+          </Link>
+          <Link
+            href="/ai/cover-letter"
+            className="text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            ✨ Cover Letter
           </Link>
           <Link
             href="/post-job"
